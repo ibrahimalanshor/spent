@@ -24,6 +24,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
-    "@ibrahimalanshor/tabri": "^0.0.2"
+    "@ibrahimalanshor/tabri": "^0.0.2",
+    "mongoose": "^6.8.1"
   }
 }

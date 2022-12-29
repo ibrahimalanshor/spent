@@ -1,5 +1,22 @@
 {
 	"http": {
-		"200": "Ok"
+		"200": "Ok",
+		"201": "Created",
+		"400": "Bad Request",
+		"404": "Not Found",
+		"422": "Unprocessable Entity",
+		"500": "Internal Server Error"
+	},
+	"validation": {
+		"exists": "the %{path} must be exists",
+		"mongoid": "the %{path} must be a mongoid",
+		"string": "the %{path} must be a string"
+	},
+	"balance-transaction": {
+		"validation": {
+			"amount": "Balance transaction ammount must be a number and not 0",
+			"balance-not-found": "Balance not found",
+			"reducing-amount-to-large": "Reducing amout too large"
+		}
 	}
 }

@@ -4,11 +4,18 @@ const BalanceTransactionModel = require('./model/balance-transaction.model.js');
 const BalanceService = require('../balance/balance.service');
 
 exports.getAll = async function getAll(query) {
-  const docs = await new BalanceTransactionQuery().paginate({
-    page: query.page,
-    limit: query.limit,
-  });
-  const count = await new BalanceTransactionQuery().count();
+  const docs = await new BalanceTransactionQuery()
+    .whereObjectId('balanceId', query.balanceId, { throw: false })
+    .where('createdAt', query.createdAt)
+    .sort(query.sort)
+    .paginate({
+      page: query.page,
+      limit: query.limit || 10,
+    });
+  const count = await new BalanceTransactionQuery()
+    .whereObjectId('balanceId', query.balanceId, { throw: false })
+    .where('createdAt', query.createdAt)
+    .count();
 
   return { count, docs };
 };

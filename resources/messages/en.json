@@ -14,8 +14,9 @@
 	},
 	"balance-transaction": {
 		"validation": {
-			"amount": "Balance transaction ammount must be a number and greater than 1",
-			"balance-not-found": "Balance not found"
+			"amount": "Balance transaction ammount must be a number and not 0",
+			"balance-not-found": "Balance not found",
+			"reducing-amount-to-large": "Reducing amout too large"
 		}
 	}
 }

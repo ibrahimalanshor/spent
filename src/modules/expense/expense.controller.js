@@ -17,9 +17,10 @@ exports.create = new Controller()
   .handle(async (ctx) => {
     try {
       const balance = await BalanceService.findOne(ctx.body.balanceId);
-      const expenseCategory = await ExpenseCategoryService.findOne(
-        ctx.body.expenseCategoryId
-      );
+
+      if (ctx.body.expenseCategoryId) {
+        await ExpenseCategoryService.findOne(ctx.body.expenseCategoryId);
+      }
 
       if (ctx.body.amount > balance.amount) {
         throw new BadRequestException(
@@ -30,7 +31,6 @@ exports.create = new Controller()
 
       return await ExpenseService.create(ctx.body, {
         balance,
-        expenseCategory,
       });
     } catch (err) {
       if (err instanceof NotFoundException) {

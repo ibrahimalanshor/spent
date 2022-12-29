@@ -12,9 +12,14 @@ module.exports = [
     .exists({ checkNull: true, checkFalsy: true })
     .withMessage('validation.exists')
     .bail()
-    .isInt({ min: 1 })
+    .isInt()
     .withMessage('balance-transaction.validation.amount')
     .bail()
+    .custom((val) => {
+      if (val == 0) throw new Error('balance-transaction.validation.amount');
+
+      return true;
+    })
     .toInt(),
   body('description')
     .optional({ checkFalsy: true, nullable: true })

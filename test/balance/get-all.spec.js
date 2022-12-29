@@ -7,7 +7,7 @@ const createApp = require('../../lib/app.js');
 
 describe('get all balance', function () {
   before(async () => {
-    this.server = await createApp({ logging: false });
+    this.server = await createApp({ logging: false, port: 5000 });
   });
 
   after(() => {

@@ -7,7 +7,7 @@ chai.should();
 
 const createApp = require('../../lib/app.js');
 
-describe('create balance transactions', function () {
+describe('add balance amount', function () {
   this.formData = {
     balanceId: null,
     amount: 10000,
@@ -50,7 +50,7 @@ describe('create balance transactions', function () {
       });
   });
 
-  it('should reduce increase amount', async () => {
+  it('should add increase amount', async () => {
     const balance = await BalanceService.findOne(this.balance._id);
 
     balance.amount.should.be.equal(this.formData.amount);

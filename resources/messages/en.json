@@ -18,5 +18,12 @@
 			"balance-not-found": "Balance not found",
 			"reducing-amount-to-large": "Reducing amout too large"
 		}
+	},
+	"expense": {
+		"validation": {
+			"amount": "Expense amout must be a number and greater than 1",
+			"balance-category-not-found": "Balance or Expense Category not found",
+			"amount-too-large": "Amount is reaching balance amount limit"
+		}
 	}
 }

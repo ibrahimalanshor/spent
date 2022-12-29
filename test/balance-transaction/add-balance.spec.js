@@ -28,7 +28,7 @@ describe('add balance amount', function () {
   });
 
   it('should create balance transactions', (done) => {
-    request('http://localhost:4000')
+    request('http://localhost:5000')
       .post('/balance-transactions')
       .set('Content-Type', 'application/json')
       .send({

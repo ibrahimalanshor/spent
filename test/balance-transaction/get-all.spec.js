@@ -15,7 +15,7 @@ describe('get all balance transactions', function () {
   });
 
   it('should return all balance transactions', function (done) {
-    request('http://localhost:4000')
+    request('http://localhost:5000')
       .get('/balance-transactions')
       .expect(200)
       .end((err, res) => {

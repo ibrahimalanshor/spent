@@ -21,7 +21,7 @@ describe('create balance transaction', function () {
   });
 
   it('should return validation error', (done) => {
-    request('http://localhost:4000')
+    request('http://localhost:5000')
       .post('/balance-transactions')
       .set('Content-Type', 'application/json')
       .expect(422)
@@ -39,7 +39,7 @@ describe('create balance transaction', function () {
   });
 
   it('should return validation error if the amount is zero', (done) => {
-    request('http://localhost:4000')
+    request('http://localhost:5000')
       .post('/balance-transactions')
       .set('Content-Type', 'application/json')
       .send({
@@ -62,7 +62,7 @@ describe('create balance transaction', function () {
   });
 
   it('should return validation error if the balance is not found', (done) => {
-    request('http://localhost:4000')
+    request('http://localhost:5000')
       .post('/balance-transactions')
       .set('Content-Type', 'application/json')
       .send({
@@ -82,7 +82,7 @@ describe('create balance transaction', function () {
   });
 
   it('should return validation error if the amount is lower than the balance amount', (done) => {
-    request('http://localhost:4000')
+    request('http://localhost:5000')
       .post('/balance-transactions')
       .set('Content-Type', 'application/json')
       .send({
@@ -102,7 +102,7 @@ describe('create balance transaction', function () {
   });
 
   it('should success create balance transaction', (done) => {
-    request('http://localhost:4000')
+    request('http://localhost:5000')
       .post('/balance-transactions')
       .set('Content-Type', 'application/json')
       .send({

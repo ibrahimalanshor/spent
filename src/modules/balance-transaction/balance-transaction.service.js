@@ -27,7 +27,7 @@ exports.create = async function create(body, { balance }) {
 
     await session.commitTransaction();
 
-    return balanceTransaction;
+    return balanceTransaction[0];
   } catch (err) {
     await session.abortTransaction();
 

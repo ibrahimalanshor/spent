@@ -23,7 +23,7 @@ exports.create = async function create(body, { balance }) {
       session,
     });
 
-    await BalanceService.addBalance(balance, body.amount, { session });
+    await BalanceService.updateAmount(balance, body.amount, { session });
 
     await session.commitTransaction();
 

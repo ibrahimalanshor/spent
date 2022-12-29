@@ -15,7 +15,7 @@ exports.findOne = async function findOne(id) {
   return await new BalanceQuery().findByIdOrFail(id);
 };
 
-exports.addBalance = async function addBalance(balance, amount, { session }) {
+exports.updateAmount = async function addBalance(balance, amount, { session }) {
   return await BalanceModel.updateOne(
     balance,
     {

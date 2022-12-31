@@ -10,7 +10,9 @@
 	"validation": {
 		"exists": "the %{path} must be exists",
 		"mongoid": "the %{path} must be a mongoid",
-		"string": "the %{path} must be a string"
+		"string": "the %{path} must be a string",
+		"file": "the %{path} must be a file",
+		"mime": "the %{path} extension is not supported"
 	},
 	"balance-transaction": {
 		"validation": {
@@ -23,7 +25,8 @@
 		"validation": {
 			"amount": "Expense amout must be a number and greater than 1",
 			"balance-category-not-found": "Balance or Expense Category not found",
-			"amount-too-large": "Amount is reaching balance amount limit"
+			"amount-too-large": "Amount is reaching balance amount limit",
+			"proof": "Proof file must be exists"
 		}
 	}
 }

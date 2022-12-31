@@ -26,6 +26,10 @@ exports.getAll = async function getAll(query) {
   return { count, docs };
 };
 
+exports.findOne = async function findOne(id) {
+  return await new ExpensQuery().findByIdOrFail(id);
+};
+
 exports.create = async function create(body, { balance }) {
   const session = await connection.startSession();
 
@@ -48,4 +52,10 @@ exports.create = async function create(body, { balance }) {
   } finally {
     session.endSession();
   }
+};
+
+exports.updateProof = async function updateProof(expense, proof) {
+  await ExpenseModel.updateOne(expense, { proof });
+
+  return expense;
 };

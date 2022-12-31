@@ -1,6 +1,7 @@
 const {
   createRouter,
   createRequestValidator,
+  createUpload,
 } = require('@ibrahimalanshor/tabri');
 
 const ExpenseController = require('./expense.controller.js');
@@ -18,6 +19,14 @@ module.exports = createRouter([
     handler: [
       createRequestValidator(ExpenseRequest.create),
       ExpenseController.create,
+    ],
+  },
+  {
+    path: '/expenses/:id/proof',
+    method: 'patch',
+    handler: [
+      createUpload(ExpenseRequest.uploadProof, 'expense.validation.proof'),
+      ExpenseController.updateProof,
     ],
   },
 ]);

@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const ExpenseVirtual = require('./expense.virtual.js');
 
 const ExpenseSchema = new Schema(
   {
@@ -22,7 +23,13 @@ const ExpenseSchema = new Schema(
   },
   {
     timestamps: true,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
   }
 );
+
+for (const virtual in ExpenseVirtual) {
+  ExpenseSchema.virtual(virtual).get(ExpenseVirtual[virtual]);
+}
 
 module.exports = ExpenseSchema;

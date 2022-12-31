@@ -43,3 +43,14 @@ exports.create = new Controller()
       throw err;
     }
   });
+
+exports.updateProof = new Controller()
+  .patch()
+  .ctx('params', 'file')
+  .handle(async (ctx) => {
+    const expense = await ExpenseService.findOne(ctx.params.id);
+
+    await ExpenseService.updateProof(expense, ctx.file.filename);
+
+    return expense;
+  });

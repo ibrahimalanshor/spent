@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --exit",
+    "test": "mocha --recursive --bail --timeout 0 --exit",
     "prepare": "husky install",
     "dev": "nodemon index.js",
     "start": "node index.js"

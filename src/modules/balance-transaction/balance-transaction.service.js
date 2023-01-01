@@ -20,6 +20,10 @@ exports.getAll = async function getAll(query) {
   return { count, docs };
 };
 
+exports.findOne = async function findOne(id) {
+  return await new BalanceTransactionQuery().findByIdOrFail(id);
+};
+
 exports.create = async function create(body, { balance }) {
   const session = await connection.startSession();
 

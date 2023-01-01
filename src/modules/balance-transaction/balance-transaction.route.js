@@ -13,6 +13,11 @@ module.exports = createRouter([
     handler: BalanceTransactionController.getAll,
   },
   {
+    path: '/balance-transactions/:id',
+    method: 'get',
+    handler: BalanceTransactionController.findOne,
+  },
+  {
     path: '/balance-transactions',
     method: 'post',
     handler: [

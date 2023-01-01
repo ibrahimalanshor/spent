@@ -11,6 +11,11 @@ exports.getAll = new Controller()
   .ctx('query')
   .handle(async (ctx) => await ExpenseService.getAll(ctx.query));
 
+exports.findOne = new Controller()
+  .get()
+  .ctx('params')
+  .handle(async (ctx) => await ExpenseService.findOne(ctx.params.id));
+
 exports.create = new Controller()
   .post()
   .ctx('body')

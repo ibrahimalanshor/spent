@@ -1,12 +1,13 @@
+require('./env.js');
+
 const path = require('path');
 
-if (process.env.NODE_ENV === 'development') require('dotenv/config');
-
-const appUrl = process.env.APP_URL || `http://localhost:4000`;
+const appPort = process.env.PORT || process.env.APP_PORT || 4000;
+const appUrl = process.env.APP_URL || `http://localhost:${appPort}`;
 
 module.exports = {
   app: {
-    port: process.env.PORT || process.env.APP_PORT || 4000,
+    port: appPort,
     url: appUrl,
   },
   upload_dir: path.resolve(

@@ -55,7 +55,7 @@ exports.create = async function create(body, { balance }) {
 };
 
 exports.updateProof = async function updateProof(expense, proof) {
-  await ExpenseModel.updateOne(expense, { proof });
+  await expense.updateOne({ proof });
 
   return expense;
 };

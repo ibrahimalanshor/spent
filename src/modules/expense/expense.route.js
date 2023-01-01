@@ -22,6 +22,11 @@ module.exports = createRouter([
     ],
   },
   {
+    path: '/expenses/:id',
+    method: 'get',
+    handler: ExpenseController.findOne,
+  },
+  {
     path: '/expenses/:id/proof',
     method: 'patch',
     handler: [

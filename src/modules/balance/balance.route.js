@@ -8,4 +8,9 @@ module.exports = createRouter([
     method: 'get',
     handler: BalanceController.getAll,
   },
+  {
+    path: '/balances/:id',
+    method: 'get',
+    handler: BalanceController.findOne,
+  },
 ]);

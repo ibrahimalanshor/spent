@@ -10,8 +10,10 @@ const ExpenseModel = require('../../src/modules/expense/model/expense.model.js')
 const createApp = require('../../lib/app.js');
 
 describe('upload expense proof', function () {
+  this.proofUrl = '';
+
   before(async () => {
-    this.server = await createApp({ logging: false, port: 5000 });
+    this.server = await createApp({ logging: false });
     this.balance = await BalanceModel.create({
       amount: 10000,
     });
@@ -91,5 +93,37 @@ describe('upload expense proof', function () {
       });
   });
 
-  // it (should return uploaded proof)
+  it('should return expense with proof url', (done) => {
+    request('http://localhost:5000')
+      .get(`/expenses/${this.expense._id}`)
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        res.body.should.be.a('object');
+        res.body.should.have.property('data');
+        res.body.data.should.be.a('object');
+        res.body.data.should.have.property('proofUrl');
+        res.body.data.proofUrl.should.be.a('string');
+
+        this.proofUrl = res.body.data.proofUrl;
+
+        done();
+      });
+  });
+
+  it('should return expense proof image', (done) => {
+    request(this.proofUrl)
+      .get('')
+      .expect(200)
+      .end((err) => {
+        if (err) {
+          return done(err);
+        }
+
+        done();
+      });
+  });
 });

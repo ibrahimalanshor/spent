@@ -1,7 +1,7 @@
 const { connection } = require('mongoose');
 const ExpensQuery = require('./expense.query.js');
 const ExpenseModel = require('./model/expense.model.js');
-const BalanceService = require('../balance/balance.service');
+const BalanceTransactionService = require('../balance-transaction/balance-transaction.service');
 
 exports.getAll = async function getAll(query) {
   const docs = await new ExpensQuery()
@@ -37,11 +37,30 @@ exports.create = async function create(body, { balance }) {
   try {
     await session.startTransaction();
 
-    const expense = await ExpenseModel.create([body], {
-      session,
-    });
-
-    await BalanceService.updateAmount(balance, -body.amount, { session });
+    const balanceTransaction = await BalanceTransactionService.create(
+      {
+        amount: -body.amount,
+        description: body.description,
+        type: 'expense',
+      },
+      {
+        balance,
+        session,
+        withTransaction: false,
+      }
+    );
+    const expense = await ExpenseModel.create(
+      [
+        {
+          balanceId: balance._id,
+          balanceTransactionId: balanceTransaction._id,
+          ...body,
+        },
+      ],
+      {
+        session,
+      }
+    );
 
     await session.commitTransaction();
 

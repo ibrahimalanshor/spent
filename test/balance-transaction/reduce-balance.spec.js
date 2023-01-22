@@ -45,6 +45,8 @@ describe('reduce balance amount', function () {
         res.body.should.have.property('data');
         res.body.data.should.be.a('object');
         res.body.data.should.have.property('_id');
+        res.body.data.should.have.property('type');
+        res.body.data.type.should.equal('outcome');
 
         done();
       });

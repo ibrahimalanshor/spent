@@ -17,6 +17,10 @@ const ExpenseSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'balance',
     },
+    balanceTransactionId: {
+      type: Schema.Types.ObjectId,
+      ref: 'balance-transaction',
+    },
     expenseCategoryId: {
       type: Schema.Types.ObjectId,
       ref: 'expense-category',

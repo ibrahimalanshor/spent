@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose');
 const ExpenseVirtual = require('./expense.virtual.js');
+const ExpensePopulate = require('./expense.populate.js');
 
 const ExpenseSchema = new Schema(
   {
@@ -30,6 +31,10 @@ const ExpenseSchema = new Schema(
 
 for (const virtual in ExpenseVirtual) {
   ExpenseSchema.virtual(virtual).get(ExpenseVirtual[virtual]);
+}
+
+for (const populate in ExpensePopulate) {
+  ExpenseSchema.virtual(populate, ExpensePopulate[populate]);
 }
 
 module.exports = ExpenseSchema;

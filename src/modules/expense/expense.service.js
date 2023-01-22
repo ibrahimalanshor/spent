@@ -10,6 +10,7 @@ exports.getAll = async function getAll(query) {
       throw: false,
     })
     .where('createdAt', query.createdAt)
+    .with('expenseCategory')
     .sort(query.sort)
     .paginate({
       page: query.page,

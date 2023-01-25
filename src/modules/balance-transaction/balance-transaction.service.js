@@ -27,18 +27,11 @@ exports.findOne = async function findOne(id) {
   return await new BalanceTransactionQuery().findByIdOrFail(id);
 };
 
-exports.create = async function create(
-  body,
-  { balance, withTransaction = true, session }
-) {
-  if (withTransaction) {
-    session = await connection.startSession();
-  }
+exports.create = async function create(body, { balance }) {
+  const session = await connection.startSession();
 
   try {
-    if (withTransaction) {
-      await session.startTransaction();
-    }
+    await session.startTransaction();
 
     const balanceTransaction = await BalanceTransactionModel.create(
       [
@@ -55,20 +48,14 @@ exports.create = async function create(
 
     await BalanceService.updateAmount(balance, body.amount, { session });
 
-    if (withTransaction) {
-      await session.commitTransaction();
-    }
+    await session.commitTransaction();
 
     return balanceTransaction[0];
   } catch (err) {
-    if (withTransaction) {
-      await session.abortTransaction();
-    }
+    await session.abortTransaction();
 
     throw err;
   } finally {
-    if (withTransaction) {
-      session.endSession();
-    }
+    session.endSession();
   }
 };

@@ -8,6 +8,12 @@ module.exports = [
     .isMongoId()
     .withMessage('validation.mongoid')
     .bail(),
+  body('balanceTransactionCategoryId')
+    .optional({ nullable: true, checkFalsy: true })
+    .bail()
+    .isMongoId()
+    .withMessage('validation.mongoid')
+    .bail(),
   body('amount')
     .exists({ checkNull: true, checkFalsy: true })
     .withMessage('validation.exists')

@@ -15,6 +15,10 @@ const BalanceTransactionSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'balance',
     },
+    balanceTransactionCategoryId: {
+      type: Schema.Types.ObjectId,
+      ref: 'balance',
+    },
   },
   {
     timestamps: true,

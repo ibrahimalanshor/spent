@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const BalanceTransactionCategoryPopulate = require('./balance-transaction.populate.js');
 
 const BalanceTransactionSchema = new Schema(
   {
@@ -17,8 +18,17 @@ const BalanceTransactionSchema = new Schema(
     },
   },
   {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
     timestamps: true,
   }
 );
+
+for (const populate in BalanceTransactionCategoryPopulate) {
+  BalanceTransactionSchema.virtual(
+    populate,
+    BalanceTransactionCategoryPopulate[populate]
+  );
+}
 
 module.exports = BalanceTransactionSchema;

@@ -13,6 +13,7 @@ exports.getAll = async function getAll(query) {
     )
     .where('createdAt', query.createdAt)
     .sort(query.sort)
+    .with('balanceTransactionCategory')
     .paginate({
       page: query.page,
       limit: query.limit || 10,
@@ -31,7 +32,9 @@ exports.getAll = async function getAll(query) {
 };
 
 exports.findOne = async function findOne(id) {
-  return await new BalanceTransactionQuery().findByIdOrFail(id);
+  return await new BalanceTransactionQuery()
+    .with('balanceTransactionCategory')
+    .findByIdOrFail(id);
 };
 
 exports.create = async function create(body, { balance }) {

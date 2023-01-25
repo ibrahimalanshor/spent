@@ -3,10 +3,6 @@ const { Schema } = require('mongoose');
 const BalanceTransactionSchema = new Schema(
   {
     amount: Number,
-    type: {
-      type: String,
-      enum: ['income', 'outcome', 'expense'],
-    },
     description: {
       type: String,
       default: null,

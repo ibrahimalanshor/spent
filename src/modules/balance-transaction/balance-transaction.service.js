@@ -6,6 +6,11 @@ const BalanceService = require('../balance/balance.service');
 exports.getAll = async function getAll(query) {
   const docs = await new BalanceTransactionQuery()
     .whereObjectId('balanceId', query.balanceId, { throw: false })
+    .whereObjectId(
+      'balanceTransactionCategoryId',
+      query.balanceTransactionCategoryId,
+      { throw: false }
+    )
     .where('createdAt', query.createdAt)
     .sort(query.sort)
     .paginate({
@@ -14,6 +19,11 @@ exports.getAll = async function getAll(query) {
     });
   const count = await new BalanceTransactionQuery()
     .whereObjectId('balanceId', query.balanceId, { throw: false })
+    .whereObjectId(
+      'balanceTransactionCategoryId',
+      query.balanceTransactionCategoryId,
+      { throw: false }
+    )
     .where('createdAt', query.createdAt)
     .count();
 

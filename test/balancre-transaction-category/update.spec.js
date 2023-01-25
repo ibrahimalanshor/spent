@@ -1,4 +1,4 @@
-const ExpenseCategoryeModel = require('../../src/modules/expense-category/model/expense-category.model.js');
+const BalanceTransactionCategoryeModel = require('../../src/modules/balance-transaction-category/model/balance-transaction-category.model.js');
 const request = require('supertest');
 const chai = require('chai');
 
@@ -6,29 +6,31 @@ chai.should();
 
 const createApp = require('../../lib/app.js');
 
-describe('update expense categories', function () {
-  this.expenseCategory = null;
+describe('update balance transaction categories', function () {
+  this.balanceTransactionCategory = null;
 
   before(async () => {
     this.server = await createApp({ logging: false, port: 5000 });
 
-    this.expenseCategory = await ExpenseCategoryeModel.create({
-      name: 'test',
-    });
+    this.balanceTransactionCategory =
+      await BalanceTransactionCategoryeModel.create({
+        name: 'test',
+      });
   });
 
   after(async () => {
     this.server.stop();
 
-    await this.expenseCategory.delete();
+    await this.balanceTransactionCategory.delete();
   });
 
   it('should return not found', function (done) {
     request('http://localhost:5000')
-      .patch('/expense-categories/foo')
+      .patch('/balance-transaction-categories/foo')
       .set('Content-Type', 'application/json')
       .send({
         name: 'update test',
+        type: 'expense',
       })
       .expect(404)
       .end((err) => {
@@ -42,8 +44,13 @@ describe('update expense categories', function () {
 
   it('should return validation error', (done) => {
     request('http://localhost:5000')
-      .patch(`/expense-categories/${this.expenseCategory._id}`)
+      .patch(
+        `/balance-transaction-categories/${this.balanceTransactionCategory._id}`
+      )
       .set('Content-Type', 'application/json')
+      .send({
+        type: 'unknown',
+      })
       .expect(422)
       .end((err, res) => {
         if (err) {
@@ -58,12 +65,15 @@ describe('update expense categories', function () {
       });
   });
 
-  it('should update a expense category', (done) => {
+  it('should update a balance transaction category', (done) => {
     request('http://localhost:5000')
-      .patch(`/expense-categories/${this.expenseCategory._id}`)
+      .patch(
+        `/balance-transaction-categories/${this.balanceTransactionCategory._id}`
+      )
       .set('Content-Type', 'application/json')
       .send({
         name: 'update test',
+        type: 'expense',
       })
       .expect(200)
       .end((err, res) => {

@@ -5,7 +5,7 @@ chai.should();
 
 const createApp = require('../../lib/app.js');
 
-describe('get all expense categories', function () {
+describe('get all balance transaction categories', function () {
   before(async () => {
     this.server = await createApp({ logging: false, port: 5000 });
   });
@@ -14,9 +14,9 @@ describe('get all expense categories', function () {
     this.server.stop();
   });
 
-  it('should return all expense categories', function (done) {
+  it('should return all balance transaction categories', function (done) {
     request('http://localhost:5000')
-      .get('/expense-categories')
+      .get('/balance-transaction-categories')
       .expect(200)
       .end((err, res) => {
         if (err) {

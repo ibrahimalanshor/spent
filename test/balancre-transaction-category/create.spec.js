@@ -1,4 +1,4 @@
-const ExpenseCategoryeModel = require('../../src/modules/expense-category/model/expense-category.model.js');
+const BalanceTransactionCategoryeModel = require('../../src/modules/balance-transaction-category/model/balance-transaction-category.model.js');
 const request = require('supertest');
 const chai = require('chai');
 
@@ -6,8 +6,8 @@ chai.should();
 
 const createApp = require('../../lib/app.js');
 
-describe('create expense category', function () {
-  this.expenseCategoryId = null;
+describe('create balance transaction category', function () {
+  this.balanceTransactionCategoryId = null;
   before(async () => {
     this.server = await createApp({ logging: false, port: 5000 });
   });
@@ -15,12 +15,14 @@ describe('create expense category', function () {
   after(async () => {
     this.server.stop();
 
-    await ExpenseCategoryeModel.deleteOne({ _id: this.expenseCategoryId });
+    await BalanceTransactionCategoryeModel.deleteOne({
+      _id: this.balanceTransactionCategoryId,
+    });
   });
 
   it('should return validation error', (done) => {
     request('http://localhost:5000')
-      .post('/expense-categories')
+      .post('/balance-transaction-categories')
       .set('Content-Type', 'application/json')
       .expect(422)
       .end((err, res) => {
@@ -36,12 +38,13 @@ describe('create expense category', function () {
       });
   });
 
-  it('should success create a expense category', (done) => {
+  it('should success create a balance transaction category', (done) => {
     request('http://localhost:5000')
-      .post('/expense-categories')
+      .post('/balance-transaction-categories')
       .set('Content-Type', 'application/json')
       .send({
         name: 'test',
+        type: 'expense',
       })
       .expect(201)
       .end((err, res) => {
@@ -54,7 +57,7 @@ describe('create expense category', function () {
         res.body.data.should.be.a('object');
         res.body.data.should.have.property('_id');
 
-        this.expenseCategoryId = res.body.data._id;
+        this.balanceTransactionCategoryId = res.body.data._id;
 
         done();
       });

@@ -4,6 +4,7 @@ const {
 const Controller = require('../../../lib/controller/controller.js');
 const MathHelper = require('../../helpers/math.helper.js');
 const BalanceTransactionService = require('./balance-transaction.service.js');
+const BalanceTransactionCategoryService = require('../balance-transaction-category/balance-transaction-category.service.js');
 const BalanceService = require('../balance/balance.service.js');
 
 exports.getAll = new Controller()
@@ -24,6 +25,20 @@ exports.create = new Controller()
   .handle(async (ctx) => {
     try {
       const balance = await BalanceService.findOne(ctx.body.balanceId);
+
+      if (ctx.body.balanceTransactionCategoryId) {
+        const balanceTransactionCategoryExists =
+          await BalanceTransactionCategoryService.exists(
+            ctx.body.balanceTransactionCategoryId
+          );
+
+        if (!balanceTransactionCategoryExists) {
+          throw new BadRequestException(
+            {},
+            'balance-transaction.validation.balance-transaction-category-not-found'
+          );
+        }
+      }
 
       if (
         MathHelper.isNegative(ctx.body.amount) &&

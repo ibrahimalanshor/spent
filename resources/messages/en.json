@@ -12,12 +12,14 @@
 		"mongoid": "the %{path} must be a mongoid",
 		"string": "the %{path} must be a string",
 		"file": "the %{path} must be a file",
-		"mime": "the %{path} extension is not supported"
+		"mime": "the %{path} extension is not supported",
+		"invalid": "the %{path} extension is invalid"
 	},
 	"balance-transaction": {
 		"validation": {
 			"amount": "Balance transaction ammount must be a number and not 0",
 			"balance-not-found": "Balance not found",
+			"balance-transaction-category-not-found": "Balance transaction category not found",
 			"reducing-amount-to-large": "Reducing amout too large"
 		}
 	},

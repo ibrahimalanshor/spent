@@ -20,6 +20,12 @@ exports.findOne = async function findOne(id) {
   return await new BalanceTransactionCategoryQuery().findByIdOrFail(id);
 };
 
+exports.exists = async function exists(id) {
+  return await new BalanceTransactionCategoryQuery()
+    .whereObjectId('_id', id)
+    .exists();
+};
+
 exports.create = async function create(body) {
   return await BalanceTransactionCategoryModel.create(body);
 };
